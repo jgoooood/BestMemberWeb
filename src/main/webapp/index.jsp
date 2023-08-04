@@ -9,6 +9,8 @@
 		<title>베스트 멤버 웹</title>
 	</head>
 	<body>
+<!-- 	헤더를 상속받아서 사용가능 -->
+		<jsp:include page="./header.html"></jsp:include>
 		<h1>베스트 멤버 웹</h1>
 		<h2>로그인 페이지</h2>
 <%-- 		<c:if test="${sessionScope.memberId != null }"></c:if> --%>

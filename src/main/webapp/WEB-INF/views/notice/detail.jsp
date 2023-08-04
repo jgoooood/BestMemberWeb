@@ -32,5 +32,19 @@
 				<p>${notice.noticeContent }</p>
 			</li>
 		</ul>
+		<a href="/notice/list.do">목록으로 이동</a><br>
+		<a href="/notice/modify.do?noticeNo=${notice.noticeNo }">수정하기</a><br>
+<!-- 		눌렀을 때 삭제 -> 삭제 알림은 자바스크립트로 -->
+<!-- 		DELETE FROM NOTICE_TBL WHERE NOTICE_NO = ? -->
+		<a href="javascript:void(0)" onclick="deleteCheck()">삭제하기</a><br>
+<!-- 	<button id="" onclick="">삭제하기</button> 버튼태그도 사용가능-->
+		<script>
+			const deleteCheck = () => {
+				const noticeNo = '${notice.noticeNo}';
+				if(confirm("삭제하시겠습니까?")) {
+					location.href = "/notice/delete.do?noticeNo="+ noticeNo;
+				}
+			}
+		</script>
 	</body>
 </html>

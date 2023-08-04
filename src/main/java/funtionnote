@@ -1,0 +1,37 @@
+* Member
+1. 회원가입 기능
+2. 로그인 기능
+3. 마이페이지 기능(회원 상세 조회)
+4. 회원 탈퇴 기능
+5. 회원 정보 수정 기능
+
+* Notice
+1. 공지사항 등록
+2. 공지사항 전체조회
+3. 공지사항 상세조회
+4. 공지사항 삭제
+5. 공지사항 수정
+6. 공지사항 페이징 처리
+ - 쿼리문 변경 ROWNUM으로 넘버링을 하여 10개씩 가져오도록 함. ORDER BY와 만났을 때 넘버의 순서가 제대로 나오지 않았음
+ - ROW_NUMBER() OVER(ORDER BY NOTICE_DATE)을 사용하여 ORDER BY를 쓰더라도 넘버의 숫자가 틀리지 않음
+ -> SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO) ROW_NUM, NOTICE_TBL. * FROM NOTICE_TBL
+ - ROW_NUM컬럼을 이용해서 (INLINE VIEW사용) BETWEEN으로 10개씩 추출
+ -> SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO) ROW_NUM, NOTICE_TBL. * FROM NOTICE_TBL) WHERE ROW_NUM BETWEEN 1 AND 10
+ - 1과 10이라는 숫자가 currentPage값에 따라서 동적으로 바뀌어야 되므로 위치홀더로 변경
+ -> SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_NO) ROW_NUM, NOTICE_TBL. * FROM NOTICE_TBL) WHERE ROW_NUM BETWEEN ? AND ?
+ -> pstmt.setInt(1, start), pstmt.setInt(2, end)
+ - int start, end에 currentPage값에 따라 값이 변할 수 있도록 수식을 사용함.
+ -> currentPage가 1이면, start는 1, end는 10, currentPage가 2면 start는 11, end는 20으로 바뀌도록 함.
+ - /notice/list.do에서 쿼리스트링 currentPage를 추가하여 url에 의해 start, end가 동적으로 바뀌도록 함 
+ - 쿼리스트링 currentPage에 수동으로 값을 변경하지 않고 list.jsp에서 페이지 네비게이터를 클릭하여 동적으로 바뀌도록 하기 위해 페이지 네비게이터 생성
+ -> NoticeDAO에 generatePageNavi() 메소드 생성
+ - 해당 메소드에서 필요한 변수는 전체 게시물의 갯수, 한 페이지당 보여줄 게시물의 갯수, 총 범위의 갯수(네비게이터의 총 갯수)를 저장하는 변수가 필요했음
+ - startNavi, endNavi를 구하는 수식을 작성하였음. startNavi와 endNavi사이는 for문으로 자동 증가하여 생성했음
+ - String을 누적하기 위해서 StringBuffer를 사용하였음
+ - 누적된 String값을 리턴하여 list.jsp에서 EL을 이용하여 출력할 수 있도록 함.
+ 
+* 이후 해야할 것
+- 전체 게시물의 갯수를 동적으로 가지고 와야함->삭제가 일어날 수 있음
+ 
+* Board
+1. 게시글 등록

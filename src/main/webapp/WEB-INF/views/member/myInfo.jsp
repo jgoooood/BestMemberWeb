@@ -33,7 +33,6 @@
 					<li>
 						<label for="member-gender">성별</label> ${member.memberGender}
 <!-- 						기존 성별 수정 코드의 오류를 막기 위해 적어주는 input태그를 hidden으로 변경->사용자노출안됨 -->
-<!-- 						기존 데이터 그대로 업데이트 되도록 함 -->
 						<input type="hidden" id="member-gender" name="member-gender" value="${member.memberGender }">
 						<c:if test="${member.memberGender eq 'M' }">남자</c:if>
 						<c:if test="${member.memberGender eq 'F' }">여자</c:if>

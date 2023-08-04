@@ -27,7 +27,7 @@
 				<col width="25%">
 				<col width="10%">
 			</colgroup>
-			<tread>
+			<thead>
 				<tr>
 					<th>글번호</th>
 					<th>글제목</th>
@@ -35,7 +35,7 @@
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
-			</tread>
+			</thead>
 			<tbody>
 <!-- 			for(Notice notice : nList) -->
 <!-- jsp는 get말고 requestScope메소드를 사용하고 requestScope 생략가능함 -->
@@ -54,6 +54,17 @@
 						<td>${notice.viewCount }</td>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td colspan="5" align="center">
+					${pageNavi }
+<!-- 							dao에서 만들어줌 -->
+<!-- 						<a href="#">1</a> -->
+<!-- 						<a href="#">2</a> -->
+<!-- 						<a href="#">3</a> -->
+<!-- 						<a href="#">4</a> -->
+<!-- 						<a href="#">5</a> -->
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</body>

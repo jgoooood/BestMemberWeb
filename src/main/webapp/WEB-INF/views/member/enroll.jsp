@@ -5,7 +5,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>회원가입</title>
-		<link rel="stylesheet" href="/resources/css/member/main.css">
+		<style>
+			ul{
+				list-style-type : none;
+				padding-left : 0;
+			}
+			li {
+				margin : 10px;
+			}
+			ul label {
+				width : 80px;
+				text-align : left;
+				float : left;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>회원가입</h1>
